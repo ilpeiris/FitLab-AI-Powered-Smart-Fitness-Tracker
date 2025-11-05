@@ -1,6 +1,6 @@
 package com.fitlife.dao;
 
-import com.fitlife.Workout; // Import our Workout model
+import com.fitlife.Workout; 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,7 +33,7 @@ public class WorkoutDAO {
         }
     }
 
-  
+
     public List<Workout> getWorkoutsByUserId(int userId) {
         List<Workout> workouts = new ArrayList<>();
         String sql = "SELECT * FROM Workouts WHERE user_id = ? ORDER BY workout_date DESC";
@@ -77,3 +77,6 @@ public class WorkoutDAO {
             return false;
         }
     }
+
+  
+}
