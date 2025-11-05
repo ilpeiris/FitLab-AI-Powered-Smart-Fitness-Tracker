@@ -59,6 +59,12 @@
 </dependency>
 
 
+<dependency>
+    <groupId>nz.ac.waikato.cms.weka</groupId>
+    <artifactId>weka-dev</artifactId>
+    <version>3.7.13</version>
+</dependency>
+
 <!--added dependencies for servlet and JSP & later others-->
 
 
