@@ -1,56 +1,90 @@
 package com.fitlife.ml;
 
 
+import weka.classifiers.Classifier; 
 import weka.classifiers.Evaluation;
-import weka.classifiers.trees.J48; 
+import weka.classifiers.bayes.NaiveBayes; // Import NaiveBayes
+import weka.classifiers.trees.J48;        // Import J48 (Decision Tree)
+import weka.classifiers.trees.RandomForest; // Import RandomForest
 import weka.core.Instances;
 import weka.core.SerializationHelper;
 import weka.core.converters.ConverterUtils.DataSource;
 
-import java.util.Random;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class ModelTrainer {
 
-    
     public static void main(String[] args) {
         try {
-          
-            String dataFilePath = "src/main/resources/data/workouts.arff";
-            DataSource source = new DataSource(dataFilePath);
-            Instances dataset = source.getDataSet();
+            
+            
+            DataSource trainSource = new DataSource("src/main/resources/data/workouts-training.arff");
+            Instances trainingSet = trainSource.getDataSet();
+            trainingSet.setClassIndex(trainingSet.numAttributes() - 1); 
 
-           
-            dataset.setClassIndex(dataset.numAttributes() - 1);
+            
+            DataSource testSource = new DataSource("src/main/resources/data/workouts-testing.arff");
+            Instances testingSet = testSource.getDataSet();
+            testingSet.setClassIndex(testingSet.numAttributes() - 1); 
 
-            System.out.println("Loaded dataset: " + dataFilePath);
-            System.out.println("Number of instances: " + dataset.numInstances());
+            System.out.println("Loaded " + trainingSet.numInstances() + " training instances.");
+            System.out.println("Loaded " + testingSet.numInstances() + " testing instances.");
             System.out.println("------------------------------------");
 
-           
-            J48 classifier = new J48();
-            classifier.buildClassifier(dataset);
+            
+            Map<String, Classifier> modelsToTest = new HashMap<>();
+            modelsToTest.put("J48 Decision Tree", new J48());
+            modelsToTest.put("RandomForest", new RandomForest());
+            modelsToTest.put("NaiveBayes", new NaiveBayes());
 
-            System.out.println("Classifier trained successfully.");
-            System.out.println("------------------------------------");
+            Classifier bestModel = null;
+            double bestAccuracy = 0.0;
+            String bestModelName = "";
 
-           
-            Evaluation eval = new Evaluation(dataset);
+            
+            for (Map.Entry<String, Classifier> entry : modelsToTest.entrySet()) {
+                String modelName = entry.getKey();
+                Classifier classifier = entry.getValue();
 
-           
-            eval.crossValidateModel(classifier, dataset, 10, new Random(1));
+                System.out.println("Training " + modelName + "...");
 
-            System.out.println("--- MODEL EVALUATION (FOR REPORT) ---");
-            System.out.println(eval.toSummaryString());
-            System.out.println(eval.toMatrixString());
-            System.out.println("------------------------------------");
+                //Train the model on the TRAINING set
+                classifier.buildClassifier(trainingSet);
 
+                // Evaluate the model on the TESTING set
+                Evaluation eval = new Evaluation(trainingSet);
+                eval.evaluateModel(classifier, testingSet);
 
-         
-            String modelFilePath = "activity_model.model";
-            SerializationHelper.write(modelFilePath, classifier);
+                //  Print the results for our report
+                System.out.println("--- RESULTS FOR: " + modelName + " ---");
+                System.out.println(eval.toSummaryString());
+                System.out.println(eval.toMatrixString()); 
+                System.out.println("Accuracy: " + eval.pctCorrect() + "%");
+                System.out.println("------------------------------------");
 
-            System.out.println("Trained model saved to: " + modelFilePath);
+                //  Check if this is the best model so far
+                if (eval.pctCorrect() > bestAccuracy) {
+                    bestAccuracy = eval.pctCorrect();
+                    bestModel = classifier;
+                    bestModelName = modelName;
+                }
+            }
+
+            //SAVE THE *BEST* MODEL
+            if (bestModel != null) {
+                String modelFilePath = "activity_model.model";
+                SerializationHelper.write(modelFilePath, bestModel);
+
+                System.out.println("====================================");
+                System.out.println("CRITICAL EVALUATION COMPLETE.");
+                System.out.println("The best model was " + bestModelName + " with " + bestAccuracy + "% accuracy.");
+                System.out.println("Saving this model to: " + modelFilePath);
+                System.out.println("====================================");
+            } else {
+                System.out.println("Error: No models were trained.");
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
