@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", user); 
 
            
-            response.sendRedirect("dashboard.jsp");
+            response.sendRedirect("dashboard");
 
         } else {
          
