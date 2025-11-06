@@ -3,9 +3,8 @@ package com.fitlife.servlets;
 
 import com.fitlife.User;
 import com.fitlife.Workout;
-import com.fitlife.Goal;
 import com.fitlife.dao.WorkoutDAO;
-import com.fitlife.dao.GoalDAO;
+
 
 
 import java.io.IOException;
@@ -23,13 +22,13 @@ import javax.servlet.http.HttpSession;
 public class DashboardServlet extends HttpServlet {
 
     private WorkoutDAO workoutDAO;
-    private GoalDAO goalDAO;
+
 
     @Override
     public void init() {
      
         workoutDAO = new WorkoutDAO();
-        goalDAO = new GoalDAO();
+
     }
 
 
@@ -53,7 +52,7 @@ public class DashboardServlet extends HttpServlet {
 
    
         List<Workout> workouts = workoutDAO.getWorkoutsByUserId(user.getUserId());
-        List<Goal> goals = goalDAO.getGoalsByUserId(user.getUserId());
+     
 
    
         int totalWorkouts = workouts.size();
@@ -67,7 +66,6 @@ public class DashboardServlet extends HttpServlet {
 
     
         request.setAttribute("workoutList", workouts);
-        request.setAttribute("goalList", goals);
         request.setAttribute("totalWorkouts", totalWorkouts);
         request.setAttribute("totalCalories", totalCalories);
         request.setAttribute("totalDistance", String.format("%.2f", totalDistance)); 
