@@ -1,5 +1,0 @@
-com\fitlife\User.class
-com\fitlife\ml\ModelTrainer.class
-com\fitlife\dao\DatabaseManager.class
-com\fitlife\Workout.class
-com\fitlife\dao\UserDAO.class
