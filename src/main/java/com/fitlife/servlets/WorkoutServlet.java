@@ -159,28 +159,68 @@ private Instances dataHeader;
         }
         User user = (User) session.getAttribute("user");
 
-        
-        String activityType = request.getParameter("activityType");
+     
+        String activityType = request.getParameter("activityType"); 
         int durationMins = Integer.parseInt(request.getParameter("durationMins"));
         double distanceKm = Double.parseDouble(request.getParameter("distanceKm"));
         int caloriesBurned = Integer.parseInt(request.getParameter("caloriesBurned"));
         String workoutDate = request.getParameter("workoutDate");
         String notes = request.getParameter("notes");
 
-        
+        //AI PREDICTION STEP (later) ---
+        String aiPrediction = "AI prediction could not be run."; 
+        if (aiModel != null) {
+            try {
+               
+                DenseInstance newInstance = new DenseInstance(dataHeader.numAttributes());
+                
+               
+                newInstance.setDataset(dataHeader); 
+
+                
+                newInstance.setValue(dataHeader.attribute("duration_mins"), durationMins);
+                newInstance.setValue(dataHeader.attribute("distance_km"), distanceKm);
+                newInstance.setValue(dataHeader.attribute("calories_burned"), caloriesBurned);
+               
+
+                double predictionIndex = aiModel.classifyInstance(newInstance);
+
+                
+                aiPrediction = dataHeader.classAttribute().value((int) predictionIndex);
+                
+                System.out.println("--- AI PREDICTION SUCCESS ---");
+                System.out.println("Input: " + durationMins + "min, " + distanceKm + "km, " + caloriesBurned + "kcal");
+                System.out.println("Predicted Activity: " + aiPrediction);
+                System.out.println("-----------------------------");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                aiPrediction = "Error during AI prediction.";
+                System.err.println("Error during AI prediction: " + e.getMessage());
+            }
+        }
+        // --- END OF AI PREDICTION ---
+
+
         Workout newWorkout = new Workout();
         newWorkout.setUserId(user.getUserId());
-        newWorkout.setActivityType(activityType);
+        newWorkout.setActivityType(activityType); 
         newWorkout.setDurationMins(durationMins);
         newWorkout.setDistanceKm(distanceKm);
         newWorkout.setCaloriesBurned(caloriesBurned);
         newWorkout.setWorkoutDate(workoutDate);
         newWorkout.setNotes(notes);
 
-       
         workoutDAO.addWorkout(newWorkout);
+
+        
+        
+        session.setAttribute("aiSuggestion", "AI Suggestion for your entry: " + aiPrediction);
 
        
         response.sendRedirect("workouts");
     }
+
+
+
 }
