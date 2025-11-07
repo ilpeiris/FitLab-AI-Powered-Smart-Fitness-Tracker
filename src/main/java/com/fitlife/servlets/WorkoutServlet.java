@@ -5,6 +5,20 @@ import com.fitlife.User;
 import com.fitlife.Workout;
 import com.fitlife.dao.WorkoutDAO;
 
+
+
+// Import WEKA classes for AI model integration
+import weka.classifiers.Classifier;
+import weka.core.Attribute;
+import weka.core.DenseInstance;
+import weka.core.Instances;
+import weka.core.SerializationHelper;
+import java.util.ArrayList;
+import javax.servlet.ServletConfig; // <-- Make sure this is here
+import javax.servlet.ServletContext; // <-- Make sure this is here
+
+
+
 // Import Servlet libraries
 import java.io.IOException;
 import java.util.List;
@@ -21,6 +35,12 @@ import javax.servlet.http.HttpSession;
 public class WorkoutServlet extends HttpServlet {
 
     private WorkoutDAO workoutDAO;
+
+// --- AI Model Variables ---
+private Classifier aiModel;
+private Instances dataHeader;
+// -------------------------
+
 
     @Override
     public void init() {
