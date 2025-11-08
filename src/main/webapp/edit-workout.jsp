@@ -22,6 +22,9 @@
         .form-section { background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin-top: 20px; }
         .form-section h2 { margin-top: 0; }
     </style>
+
+<link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
 

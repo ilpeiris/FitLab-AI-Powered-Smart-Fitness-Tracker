@@ -33,6 +33,9 @@
             margin-top: 20px;
         }
     </style>
+
+<link rel="stylesheet" href="css/style.css">
+
 </head>
 
 
