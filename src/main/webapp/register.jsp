@@ -7,36 +7,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register for FitLife</title>
-
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <h2>Register for FitLife</h2>
+    <div class="form-container">
+        <h2>Register for FitLife</h2>
 
-    <form action="register" method="POST">
-        <div>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div>
-            <button type="submit">Register</button>
-        </div>
-    </form>
+        <c:if test="${not empty error}">
+            <div class="error-message">${error}</div>
+        </c:if>
 
-    <hr>
-
-    <c:if test="${not empty error}">
-        <p style="color: red;">${error}</p>
-    </c:if>
-
-    <p>
-        Already have an account? <a href="login.jsp">Login Here</a>
-    </p>
+        <form action="register" method="POST">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div>
+                <button type="submit" class="btn">Register</button>
+            </div>
+        </form>
+        <hr style="margin-top: 1.5rem; border: 0; border-top: 1px solid #eee;">
+        <p style="text-align: center; margin-top: 1rem;">
+            Already have an account? <a href="login.jsp">Login Here</a>
+        </p>
+    </div>
 
 </body>
 </html>
