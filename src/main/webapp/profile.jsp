@@ -11,17 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Profile</title>
-    <style>
-        nav { background-color: #f0f0f0; padding: 10px; }
-        nav a { margin-right: 15px; }
-        body { font-family: sans-serif; }
-        .form-section { background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin-top: 20px; }
-        .form-section h2 { margin-top: 0; }
-        .error { color: red; }
-        .success { color: green; }
-    </style>
-<link rel="stylesheet" href="css/style.css">
-
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -32,16 +22,14 @@
         <a href="logout">Logout</a>
     </nav>
 
-    <h1>Manage Profile</h1>
-
-    <div class="form-section">
+    <div class="form-container">
         <h2>Change Password</h2>
 
         <c:if test="${not empty error}">
-            <p class="error">${error}</p>
+            <div class="error-message">${error}</div>
         </c:if>
         <c:if test="${not empty success}">
-            <p class="success">${success}</p>
+            <div class="success-message">${success}</div>
         </c:if>
 
         <form action="profile" method="POST">
@@ -58,7 +46,7 @@
                 <input type="password" id="confirmPassword" name="confirmPassword" required>
             </div>
             <div>
-                <button type="submit">Update Password</button>
+                <button type="submit" class="btn">Update Password</button>
             </div>
         </form>
     </div>
