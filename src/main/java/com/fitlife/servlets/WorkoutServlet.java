@@ -9,13 +9,13 @@ import com.fitlife.MLModelManager; // <-- Imported the new manager
 
 // Import WEKA classes for AI model integration
 import weka.classifiers.Classifier;
-import weka.core.Attribute;
+//import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instances;
-import weka.core.SerializationHelper;
-import java.util.ArrayList;
+//import weka.core.SerializationHelper;
+//import java.util.ArrayList;
 import javax.servlet.ServletConfig; // <-- Make sure this is here
-import javax.servlet.ServletContext; // <-- Make sure this is here
+//import javax.servlet.ServletContext; // <-- Make sure this is here
 
 
 
