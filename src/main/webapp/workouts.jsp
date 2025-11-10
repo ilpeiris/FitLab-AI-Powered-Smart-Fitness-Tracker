@@ -179,30 +179,48 @@
             const distance = distanceInput.value;
             const calories = caloriesInput.value;
 
-            // Only fetch if all three fields have a value
-            if (duration && duration > 0 && distance && distance >= 0 && calories && calories > 0) {
-                suggestionSpan.innerText = "AI is thinking...";
-                
-                try {
-                    // Build the URL for  new API
-                    const url = `api/predict?duration=${duration}&distance=${distance}&calories=${calories}`;
-                    
-                    const response = await fetch(url);
-                    const data = await response.json();
+            console.log('fetchPrediction called - Duration:', duration, 'Distance:', distance, 'Calories:', calories);
 
-                    if (response.ok && data.prediction) {
-                        suggestionSpan.style.color = "#007bff"; // Blue
-                        suggestionSpan.innerText = "AI Suggestion: " + data.prediction;
-                    } else {
+            // Only fetch if all three fields have a value (and are not empty strings)
+            if (duration !== '' && distance !== '' && calories !== '') {
+                const durationNum = parseFloat(duration);
+                const distanceNum = parseFloat(distance);
+                const caloriesNum = parseFloat(calories);
+
+                console.log('Parsed numbers - durationNum:', durationNum, 'distanceNum:', distanceNum, 'caloriesNum:', caloriesNum);
+                console.log('Type check - durationNum:', typeof durationNum, 'distanceNum:', typeof distanceNum, 'caloriesNum:', typeof caloriesNum);
+
+                // Validate that they are valid numbers
+                if (!isNaN(durationNum) && durationNum > 0 && !isNaN(distanceNum) && distanceNum >= 0 && !isNaN(caloriesNum) && caloriesNum > 0) {
+                    suggestionSpan.innerText = "AI is thinking...";
+                    
+                    try {
+                        // Build the URL for  new API - using string concatenation for safety
+                        const url = 'api/predict?duration=' + durationNum + '&distance=' + distanceNum + '&calories=' + caloriesNum;
+                        console.log('Fetching URL:', url);
+                        console.log('URL constructed with values:', durationNum, distanceNum, caloriesNum);
+                        
+                        const response = await fetch(url);
+                        const data = await response.json();
+
+                        if (response.ok && data.prediction) {
+                            suggestionSpan.style.color = "#007bff"; // Blue
+                            suggestionSpan.innerText = "AI Suggestion: " + data.prediction;
+                        } else {
+                            suggestionSpan.style.color = "#dc3545"; // Red
+                            suggestionSpan.innerText = "Could not predict.";
+                        }
+                    } catch (error) {
+                        console.error('Error fetching prediction:', error);
                         suggestionSpan.style.color = "#dc3545"; // Red
-                        suggestionSpan.innerText = "Could not predict.";
+                        suggestionSpan.innerText = "Error contacting AI.";
                     }
-                } catch (error) {
-                    console.error('Error fetching prediction:', error);
-                    suggestionSpan.style.color = "#dc3545"; // Red
-                    suggestionSpan.innerText = "Error contacting AI.";
+                } else {
+                    console.log('Validation failed - not all fields have valid positive numbers');
+                    suggestionSpan.innerText = ""; // Clear suggestion if validation fails
                 }
             } else {
+                console.log('One or more fields are empty');
                 suggestionSpan.innerText = ""; // Clear suggestion if fields are empty
             }
         }
