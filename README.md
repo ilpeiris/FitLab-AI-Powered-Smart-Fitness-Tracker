@@ -6,7 +6,7 @@
 ![WEKA](https://img.shields.io/badge/WEKA-3.7.13-5C8A00?style=flat-square)
 ![SQLite](https://img.shields.io/badge/SQLite-3.45-003B57?style=flat-square&logo=sqlite&logoColor=white)
 ![Chart.js](https://img.shields.io/badge/Chart.js-4.x-FF6384?style=flat-square&logo=chartdotjs&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+![License](https://img.shields.io/badge/License-GPL%20v3-blue?style=flat-square)
 ![Build](https://img.shields.io/badge/Build-WAR-blue?style=flat-square)
 
 > A full-stack Java 17 web application featuring an end-to-end WEKA ML pipeline from custom dataset creation through multi-model training, evaluation, and serialized deployment with **dual AI integration**: a real-time JAX-RS REST inference API and a post-submission prediction comparison engine. Built on MVC + DAO architecture with jBCrypt authentication and a Chart.js analytics dashboard. Packaged as a deployable WAR artifact targeting Apache Tomcat 9.
