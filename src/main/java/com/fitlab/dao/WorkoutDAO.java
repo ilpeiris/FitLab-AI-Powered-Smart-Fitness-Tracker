@@ -1,6 +1,6 @@
-package com.fitlife.dao;
+package com.fitlab.dao;
 
-import com.fitlife.Workout; 
+import com.fitlab.Workout; 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -1,4 +1,4 @@
-package com.fitlife.dao;
+package com.fitlab.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +14,7 @@ public class DatabaseManager {
 
     /**
      * This method is called by AppLifecycleListener when the app starts.
-     * @param absolutePath The real, absolute path to fitlife.db
+     * @param absolutePath The real, absolute path to fitlab.db
      */
 
     public static void setDatabasePath(String absolutePath) {

@@ -1,4 +1,4 @@
-package com.fitlife;
+package com.fitlab;
 
 import weka.classifiers.Classifier;
 import weka.core.Attribute;

@@ -1,9 +1,9 @@
-package com.fitlife.servlets;
+package com.fitlab.servlets;
 
 
-import com.fitlife.User;
-import com.fitlife.Workout;
-import com.fitlife.dao.WorkoutDAO;
+import com.fitlab.User;
+import com.fitlab.Workout;
+import com.fitlab.dao.WorkoutDAO;
 
 
 import java.io.IOException;

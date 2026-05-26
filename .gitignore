@@ -1,2 +1,5 @@
 # Ignore the Maven build output folder
 /target/
+# Database
+*.db
+src/main/webapp/*.db

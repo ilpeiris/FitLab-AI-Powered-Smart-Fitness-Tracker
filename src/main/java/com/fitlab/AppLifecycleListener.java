@@ -7,9 +7,9 @@
 
 
 
-package com.fitlife;
+package com.fitlab;
 
-import com.fitlife.dao.DatabaseManager; // Import our DatabaseManager
+import com.fitlab.dao.DatabaseManager; // Import our DatabaseManager
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -29,8 +29,8 @@ public class AppLifecycleListener implements ServletContextListener {
         javax.servlet.ServletContext context = sce.getServletContext();
 
         //get the "real, absolute path" to our database file
-        // This will be C:\apache-tomcat-9\webapps\fitlife\fitlife.db 
-        String dbPath = context.getRealPath("/fitlife.db");
+        // This will be C:\apache-tomcat-9\webapps\fitlab\fitlab.db 
+        String dbPath = context.getRealPath("/fitlab.db");
 
         // Save this path in our DatabaseManager for all our DAOs to use.
         DatabaseManager.setDatabasePath(dbPath);
@@ -41,7 +41,7 @@ public class AppLifecycleListener implements ServletContextListener {
    
    // ---  NEW CODE for realtime ai ---
         try {
-            com.fitlife.MLModelManager.loadModel(context); // Load the AI model
+            com.fitlab.MLModelManager.loadModel(context); // Load the AI model
         } catch (javax.servlet.ServletException e) {
             e.printStackTrace();
         }

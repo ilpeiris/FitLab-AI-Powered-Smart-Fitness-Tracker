@@ -1,8 +1,8 @@
-package com.fitlife.servlets;
+package com.fitlab.servlets;
 
 
-import com.fitlife.User;
-import com.fitlife.dao.UserDAO;
+import com.fitlab.User;
+import com.fitlab.dao.UserDAO;
 
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.fitlife.api;
+package com.fitlab.api;
 
 // JAX-RS Imports
 import javax.ws.rs.GET;
@@ -8,8 +8,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-// WEKA and FitLife Imports
-import com.fitlife.MLModelManager;
+// WEKA and FitLAB Imports
+import com.fitlab.MLModelManager;
 import weka.classifiers.Classifier;
 import weka.core.DenseInstance;
 import weka.core.Instances;

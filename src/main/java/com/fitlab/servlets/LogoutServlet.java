@@ -1,4 +1,4 @@
-package com.fitlife.servlets;
+package com.fitlab.servlets;
 
 
 import java.io.IOException;

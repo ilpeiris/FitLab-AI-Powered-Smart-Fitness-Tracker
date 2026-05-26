@@ -1,7 +1,7 @@
-package com.fitlife.dao;
+package com.fitlab.dao;
 
 
-import com.fitlife.User;
+import com.fitlab.User;
 
 
 import java.sql.Connection;

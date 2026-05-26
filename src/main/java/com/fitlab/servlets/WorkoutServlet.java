@@ -1,11 +1,11 @@
-package com.fitlife.servlets;
+package com.fitlab.servlets;
 
 
-import com.fitlife.User;
-import com.fitlife.Workout;
-import com.fitlife.dao.WorkoutDAO;
+import com.fitlab.User;
+import com.fitlab.Workout;
+import com.fitlab.dao.WorkoutDAO;
 
-import com.fitlife.MLModelManager; // <-- Imported the new manager
+import com.fitlab.MLModelManager; // <-- Imported the new manager
 
 // Import WEKA classes for AI model integration
 import weka.classifiers.Classifier;

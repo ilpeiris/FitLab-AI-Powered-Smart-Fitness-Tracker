@@ -1,4 +1,4 @@
-package com.fitlife;
+package com.fitlab;
 
 
 public class User {

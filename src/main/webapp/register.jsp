@@ -6,13 +6,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register for FitLife</title>
+    <title>Register for FitLAB</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
     <div class="form-container">
-        <h2>Register for FitLife</h2>
+        <h2>Register for FitLAB</h2>
 
         <c:if test="${not empty error}">
             <div class="error-message">${error}</div>
